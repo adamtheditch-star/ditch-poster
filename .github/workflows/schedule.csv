@@ -1,8 +1,0 @@
-date,start,end,show,host,image_url,colour
-# Optional. Use this for shows Radio.co doesn't know about, or to override a name / add a host.
-# date = YYYY-MM-DD for one-offs, or a weekday (Mon, Tue ... Sun) for weekly shows. Times are UK time.
-# colour = background colour for the card, e.g. #fcc419 (optional).
-# image_url = a web link or a file in this folder (e.g. assets/shows/basement.jpg). Leave blank for a text card.
-# Examples (remove the leading # to use a line):
-#Fri,20:00,22:00,Example Weekly Show,DJ Name,,
-#2026-10-03,18:00,20:00,Example One-Off Special,Guest DJ,,#ff8fab
