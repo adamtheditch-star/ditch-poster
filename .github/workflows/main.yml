@@ -44,4 +44,7 @@ jobs:
           git config user.name "ditch-poster"
           git config user.email "ditch-poster@users.noreply.github.com"
           for f in state.json state.dry.json; do [ -f "$f" ] && git add -f "$f"; done
-          git diff --cached --quiet || (git commit -m "update post history [skip ci]" && git push)
+          git diff --cached --quiet && exit 0
+          git commit -m "update post history [skip ci]"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
