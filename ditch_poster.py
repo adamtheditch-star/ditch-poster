@@ -112,6 +112,14 @@ CFG = {
 }
 
 
+def find_asset(name: str) -> Path:
+    """assets/<name>, or <name> next to this script (web uploads can flatten folders)."""
+    for p in (HERE / "assets" / name, HERE / name):
+        if p.exists():
+            return p
+    return HERE / "assets" / name
+
+
 def log(*a) -> None:
     print(datetime.now().strftime("%H:%M:%S"), *a, flush=True)
 
@@ -252,7 +260,7 @@ def hex_rgb(h: str) -> tuple[int, int, int]:
 
 def font(size: int, bold: bool = True) -> ImageFont.FreeTypeFont:
     name = "Poppins-Bold.ttf" if bold else "Poppins-Medium.ttf"
-    p = HERE / "assets" / name
+    p = find_asset(name)
     try:
         return ImageFont.truetype(str(p), size)
     except OSError:
@@ -295,7 +303,7 @@ def text_on(rgb: tuple[int, int, int]) -> tuple[int, int, int]:
 
 
 def asset(name: str) -> Image.Image | None:
-    p = HERE / "assets" / name
+    p = find_asset(name)
     return Image.open(p).convert("RGBA") if p.exists() else None
 
 
@@ -464,8 +472,15 @@ def publish_image(path: Path) -> str:
 def ig_post(image_url: str, text: str, fmt: str) -> str:
     base = f"https://{CFG['graph_host']}/{CFG['graph']}"
     uid, tok = CFG["ig_user_id"], CFG["ig_token"]
-    if not (uid and tok):
-        raise RuntimeError("Set IG_USER_ID and IG_ACCESS_TOKEN")
+    if not tok:
+        raise RuntimeError("Set IG_ACCESS_TOKEN")
+    if not uid:  # work it out from the token, so IG_USER_ID is optional
+        me = requests.get(f"{base}/me", params={"fields": "user_id,username", "access_token": tok},
+                          timeout=30)
+        if not me.ok:
+            raise RuntimeError(f"IG token check failed: {me.text}")
+        uid = CFG["ig_user_id"] = str(me.json().get("user_id") or me.json()["id"])
+        log(f"Instagram account: @{me.json().get('username', '?')} ({uid})")
     data = {"image_url": image_url, "access_token": tok}
     if fmt == "story":
         data["media_type"] = "STORIES"
@@ -535,11 +550,34 @@ def announce(show: Show, kind: str, state: dict, dry: bool) -> None:
             log(f"FAILED {kind} {fmt} for {show.title}: {e}")
 
 
+def check_token() -> None:
+    """Dry-run helper: prove the Instagram token works without posting anything."""
+    if not CFG["ig_token"]:
+        log("Instagram token: not set (IG_ACCESS_TOKEN)")
+        return
+    base = f"https://{CFG['graph_host']}/{CFG['graph']}"
+    try:
+        r = requests.get(f"{base}/me", params={"fields": "user_id,username",
+                                              "access_token": CFG["ig_token"]}, timeout=30)
+        if r.ok:
+            log(f"Instagram token OK: @{r.json().get('username', '?')}")
+        else:
+            log(f"Instagram token PROBLEM: {r.text[:300]}")
+    except Exception as e:  # noqa: BLE001
+        log(f"Instagram token check failed ({e})")
+
+
 def run(dry: bool, now: datetime | None = None, shows: list[Show] | None = None,
         status: dict | None = None) -> None:
+    if dry and now is None:
+        check_token()
     now = now or datetime.now(timezone.utc)
     state = load_state(dry)
-    shows = get_schedule() if shows is None else shows
+    if shows is None:
+        shows = get_schedule()
+        nxt = [s for s in shows if s.end > now][:3]
+        for s in nxt:
+            log(f"next: {s.start.astimezone(CFG['tz']):%a %H:%M} {s.title}")
     lead = timedelta(minutes=CFG["coming_up_lead"])
     grace = timedelta(minutes=CFG["live_grace"])
 
