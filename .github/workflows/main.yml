@@ -1,0 +1,47 @@
+name: Post shows to Instagram
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: post-shows
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Check schedule and post
+        env:
+          RADIOCO_STATION_ID: ${{ vars.RADIOCO_STATION_ID || 'sd72a8fdcd' }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRY_RUN: ${{ vars.DRY_RUN || 'true' }}
+          IGNORE_SHOWS: ${{ vars.IGNORE_SHOWS }}
+          COMING_UP_MINUTES: ${{ vars.COMING_UP_MINUTES }}
+          COMING_UP_AS: ${{ vars.COMING_UP_AS }}
+          LIVE_NOW_AS: ${{ vars.LIVE_NOW_AS }}
+          HASHTAGS: ${{ vars.HASHTAGS }}
+        run: python ditch_poster.py
+
+      - name: Remember what was posted
+        run: |
+          git config user.name "ditch-poster"
+          git config user.email "ditch-poster@users.noreply.github.com"
+          for f in state.json state.dry.json; do [ -f "$f" ] && git add -f "$f"; done
+          git diff --cached --quiet || (git commit -m "update post history [skip ci]" && git push)
