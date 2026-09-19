@@ -170,7 +170,9 @@ def schedule_from_radioco() -> list[Show]:
             title=title.strip(),
             start=parse_dt(start, CFG["tz"]),
             end=parse_dt(end, CFG["tz"]),
-            host=(pl.get("artist") or "").strip(),
+            # "The Ditch" is the station's default artist, so don't print "with The Ditch"
+            host="" if (pl.get("artist") or "").strip().lower() in ("", "the ditch", title.strip().lower())
+            else (pl.get("artist") or "").strip(),
             image_url=pl.get("artwork") or pl.get("artwork_url") or "",
             source="radioco",
             colour=pl.get("colour") or "",
@@ -567,6 +569,26 @@ def check_token() -> None:
         log(f"Instagram token check failed ({e})")
 
 
+def remember_shows(shows: list[Show], state: dict, now: datetime) -> list[Show]:
+    """Radio.co drops a show from its feed once it starts playing, so keep every show we
+    have seen in state and add back any that are still on air (needed for "Live now")."""
+    known = state.setdefault("known", {})
+    for s in shows:
+        known[s.key] = {"title": s.title, "start": s.start.isoformat(), "end": s.end.isoformat(),
+                        "host": s.host, "image_url": s.image_url, "source": s.source,
+                        "colour": s.colour}
+    have = {s.key for s in shows}
+    for k, v in list(known.items()):
+        end = datetime.fromisoformat(v["end"])
+        if end < now - timedelta(days=1):
+            del known[k]  # tidy up old shows
+            continue
+        if k not in have and end > now:
+            shows.append(Show(v["title"], datetime.fromisoformat(v["start"]), end, v.get("host", ""),
+                              v.get("image_url", ""), v.get("source", ""), v.get("colour", "")))
+    return sorted(shows, key=lambda s: s.start)
+
+
 def run(dry: bool, now: datetime | None = None, shows: list[Show] | None = None,
         status: dict | None = None) -> None:
     if dry and now is None:
@@ -574,7 +596,7 @@ def run(dry: bool, now: datetime | None = None, shows: list[Show] | None = None,
     now = now or datetime.now(timezone.utc)
     state = load_state(dry)
     if shows is None:
-        shows = get_schedule()
+        shows = remember_shows(get_schedule(), state, now)
         nxt = [s for s in shows if s.end > now][:3]
         for s in nxt:
             log(f"next: {s.start.astimezone(CFG['tz']):%a %H:%M} {s.title}")
