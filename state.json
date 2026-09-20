@@ -10,15 +10,6 @@
     }
   },
   "known": {
-    "f8dd9b138547": {
-      "title": "The Ditch",
-      "start": "2026-09-19T22:30:00+00:00",
-      "end": "2026-09-19T23:00:00+00:00",
-      "host": "",
-      "image_url": "",
-      "source": "csv",
-      "colour": "#cc5de8"
-    },
     "f75aed4ed313": {
       "title": "The Improvement Room",
       "start": "2026-09-21T19:00:00+00:00",
