@@ -442,12 +442,18 @@ def clips() -> list[Path]:
 
 def render_video(show: Show, kind: str) -> Path | None:
     """A random background clip, cropped to 9:16, with the stamp card laid over it."""
+    return video_from_overlay(render_card(show, kind, "story", transparent=True))
+
+
+def video_from_overlay(overlay: Path) -> Path | None:
+    """Lay any transparent 1080x1920 card over a random background clip.
+
+    Used by the show Stories and by the weekly line-up / listen-back posts."""
     pool = clips()
     if not pool:
         return None
     clip = random.choice(pool)
-    overlay = render_card(show, kind, "story", transparent=True)
-    out = overlay.with_name(overlay.name.replace("-overlay.png", ".mp4"))
+    out = overlay.with_name(re.sub(r"(-overlay)?\.png$", ".mp4", overlay.name))
     secs = int(CFG["video_seconds"])
     # random moment in the clip, so the same clip looks different each time
     start = 0.0
@@ -750,7 +756,23 @@ def run(dry: bool, now: datetime | None = None, shows: list[Show] | None = None,
         elif src and src.get("type") != "live":
             state.pop("live_since", None)  # session over; next live set gets a new post
 
+    extras(state, dry, now)
     save_state(state, dry)
+
+
+def extras(state: dict, dry: bool, now: datetime) -> None:
+    """The weekly line-up and the Mixcloud listen-back posts, if ditch_extras.py is there."""
+    if not env_bool("EXTRAS", True):
+        return
+    try:
+        import ditch_extras
+    except Exception as e:  # noqa: BLE001  the show posts must run with or without it
+        log(f"extras not loaded ({e})")
+        return
+    try:
+        ditch_extras.extras_pass(state, dry, now)
+    except Exception as e:  # noqa: BLE001
+        log(f"extras pass failed ({e})")
 
 
 def watch(minutes: int, dry: bool) -> None:
