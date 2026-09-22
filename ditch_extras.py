@@ -129,7 +129,8 @@ def weekly_caption(rows: list[Show], week_start: datetime) -> str:
 
 
 # --------------------------------------------------------------------------- mixcloud
-def new_uploads(since_hours: int = 72) -> list[dict]:
+def new_uploads(since_hours: int | None = None) -> list[dict]:
+    since_hours = since_hours if since_hours is not None else int(dp.env("MIXCLOUD_SINCE_HOURS", "72"))
     url = f"https://api.mixcloud.com/{MIXCLOUD_USER}/cloudcasts/?limit=20"
     r = requests.get(url, headers=dp.UA, timeout=30)
     r.raise_for_status()
