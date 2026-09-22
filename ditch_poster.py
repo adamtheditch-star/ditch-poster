@@ -536,16 +536,38 @@ def publish_image(path: Path) -> str:
     return url
 
 
-def already_published(card: Path) -> bool:
-    """A card of this name already on the cards branch means we posted it in an earlier run
-    (state.json can be lost if a run is cancelled, so this is the durable check)."""
+def receipt_url(key: str) -> str:
+    safe = re.sub(r"[^a-z0-9]+", "-", key.lower()).strip("-")
+    return f"https://raw.githubusercontent.com/{CFG['gh_repo']}/{CFG['gh_branch']}/posted/{safe}.txt"
+
+
+def already_published(key: str) -> bool:
+    """A receipt on the cards branch means this Story really did post in an earlier run.
+    (state.json can be lost when a run is cancelled, so this is the durable check. The card
+    image itself is NOT proof: the upload happens before the post, so a failed post leaves one
+    behind and the next run must be free to try again.)"""
     if CFG["host"] != "github" or not CFG["gh_repo"]:
         return False
-    url = f"https://raw.githubusercontent.com/{CFG['gh_repo']}/{CFG['gh_branch']}/cards/{card.name}"
     try:
-        return requests.head(url, timeout=15).status_code == 200
+        return requests.head(receipt_url(key), timeout=15).status_code == 200
     except Exception:  # noqa: BLE001
         return False
+
+
+def write_receipt(key: str, media_id: str) -> None:
+    """Record that this Story posted, so a later run never repeats it."""
+    if CFG["host"] != "github" or not (CFG["gh_repo"] and CFG["gh_token"]):
+        return
+    safe = re.sub(r"[^a-z0-9]+", "-", key.lower()).strip("-")
+    api = f"https://api.github.com/repos/{CFG['gh_repo']}/contents/posted/{safe}.txt"
+    h = {"Authorization": f"Bearer {CFG['gh_token']}", "Accept": "application/vnd.github+json", **UA}
+    body = f"{datetime.now(timezone.utc).isoformat()} media {media_id}\n"
+    try:
+        requests.put(api, headers=h, timeout=30, json={
+            "message": f"posted: {safe}", "branch": CFG["gh_branch"],
+            "content": base64.b64encode(body.encode()).decode()})
+    except Exception as e:  # noqa: BLE001
+        log(f"could not write receipt ({e})")
 
 
 # --------------------------------------------------------------------------- instagram
@@ -620,7 +642,7 @@ def announce(show: Show, kind: str, state: dict, dry: bool) -> None:
         if CFG["video"] and fmt == "story" and kind in CFG["video_kinds"]:
             card = render_video(show, kind) or card  # falls back to the still card
         text = caption(show, kind)
-        if not dry and already_published(card):
+        if not dry and already_published(key):
             log(f"already posted earlier: {kind} {fmt}: {show.title}")
             state["posted"][key] = {"at": datetime.now(timezone.utc).isoformat(), "seen": True}
             continue
@@ -633,6 +655,7 @@ def announce(show: Show, kind: str, state: dict, dry: bool) -> None:
             media_id = ig_post(url, text, fmt)
             log(f"posted {kind} {fmt}: {show.title} (media {media_id})")
             state["posted"][key] = {"at": datetime.now(timezone.utc).isoformat(), "id": media_id}
+            write_receipt(key, media_id)
         except Exception as e:  # noqa: BLE001
             log(f"FAILED {kind} {fmt} for {show.title}: {e}")
 
