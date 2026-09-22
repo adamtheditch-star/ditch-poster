@@ -470,6 +470,18 @@ def publish_image(path: Path) -> str:
     return url
 
 
+def already_published(card: Path) -> bool:
+    """A card of this name already on the cards branch means we posted it in an earlier run
+    (state.json can be lost if a run is cancelled, so this is the durable check)."""
+    if CFG["host"] != "github" or not CFG["gh_repo"]:
+        return False
+    url = f"https://raw.githubusercontent.com/{CFG['gh_repo']}/{CFG['gh_branch']}/cards/{card.name}"
+    try:
+        return requests.head(url, timeout=15).status_code == 200
+    except Exception:  # noqa: BLE001
+        return False
+
+
 # --------------------------------------------------------------------------- instagram
 def ig_post(image_url: str, text: str, fmt: str) -> str:
     base = f"https://{CFG['graph_host']}/{CFG['graph']}"
@@ -539,6 +551,10 @@ def announce(show: Show, kind: str, state: dict, dry: bool) -> None:
             continue
         card = render_card(show, kind, fmt)
         text = caption(show, kind)
+        if not dry and already_published(card):
+            log(f"already posted earlier: {kind} {fmt}: {show.title}")
+            state["posted"][key] = {"at": datetime.now(timezone.utc).isoformat(), "seen": True}
+            continue
         if dry:
             log(f"[dry-run] {kind} {fmt}: {show.title} -> {card.name}\n    {text!r}")
             state["posted"][key] = {"at": datetime.now(timezone.utc).isoformat(), "dry": True}
@@ -631,6 +647,23 @@ def run(dry: bool, now: datetime | None = None, shows: list[Show] | None = None,
     save_state(state, dry)
 
 
+def watch(minutes: int, dry: bool) -> None:
+    """GitHub only honours its cron every few hours, so one run stays awake and checks
+    every POLL_MINUTES until its time is up."""
+    poll = max(1, int(env("POLL_MINUTES", "5"))) * 60
+    until = time.time() + minutes * 60
+    log(f"watching for {minutes} minutes, checking every {poll // 60} min")
+    while True:
+        try:
+            run(dry=dry)
+        except Exception as e:  # noqa: BLE001  keep the watcher alive
+            log(f"pass failed ({e})")
+        if time.time() + poll > until:
+            log("watch finished")
+            return
+        time.sleep(poll)
+
+
 def preview() -> None:
     now = datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0)
     sample = [
@@ -651,6 +684,8 @@ if __name__ == "__main__":
     ap.add_argument("--dry-run", action="store_true", help="render cards, don't post")
     ap.add_argument("--preview", action="store_true", help="render sample cards and exit")
     ap.add_argument("--list", action="store_true", help="print the upcoming schedule and exit")
+    ap.add_argument("--watch", type=int, metavar="MINUTES", default=int(env("WATCH_MINUTES", "0")),
+                    help="keep checking every few minutes for this long (0 = single pass)")
     a = ap.parse_args()
     if a.preview:
         preview()
@@ -659,4 +694,5 @@ if __name__ == "__main__":
             loc = s.start.astimezone(CFG["tz"])
             print(f"{loc:%a %d %b %H:%M}  {s.title}  {('— ' + s.host) if s.host else ''}  [{s.source}]")
     else:
-        run(dry=a.dry_run or env_bool("DRY_RUN", False))
+        dry = a.dry_run or env_bool("DRY_RUN", False)
+        watch(a.watch, dry) if a.watch else run(dry=dry)
