@@ -38,6 +38,18 @@ jobs:
           COMING_UP_AS: ${{ vars.COMING_UP_AS }}
           LIVE_NOW_AS: ${{ vars.LIVE_NOW_AS }}
           HASHTAGS: ${{ vars.HASHTAGS }}
+          VIDEO_STORIES: ${{ vars.VIDEO_STORIES }}
+          VIDEO_SECONDS: ${{ vars.VIDEO_SECONDS }}
+          # weekly line-up and Mixcloud listen-back posts
+          EXTRAS: ${{ vars.EXTRAS }}
+          WEEKLY_AS: ${{ vars.WEEKLY_AS }}
+          WEEKLY_DAY: ${{ vars.WEEKLY_DAY }}
+          WEEKLY_HOUR: ${{ vars.WEEKLY_HOUR }}
+          WEEKLY_VIDEO: ${{ vars.WEEKLY_VIDEO }}
+          MIXCLOUD_USER: ${{ vars.MIXCLOUD_USER }}
+          LISTEN_BACK_AS: ${{ vars.LISTEN_BACK_AS }}
+          LISTEN_BACK_VIDEO: ${{ vars.LISTEN_BACK_VIDEO }}
+          MAX_LISTEN_BACK_PER_RUN: ${{ vars.MAX_LISTEN_BACK_PER_RUN }}
           POLL_MINUTES: ${{ vars.POLL_MINUTES || '5' }}
         run: python ditch_poster.py --watch ${{ vars.WATCH_MINUTES || '330' }}
 
