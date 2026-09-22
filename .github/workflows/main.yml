@@ -2,7 +2,7 @@ name: Post shows to Instagram
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "0 * * * *"   # GitHub often runs this only every few hours, so each run watches
   workflow_dispatch:
 
 permissions:
@@ -10,11 +10,12 @@ permissions:
 
 concurrency:
   group: post-shows
-  cancel-in-progress: false
+  cancel-in-progress: true   # a newer run replaces the one that is watching
 
 jobs:
   post:
     runs-on: ubuntu-latest
+    timeout-minutes: 350
     steps:
       - uses: actions/checkout@v4
 
@@ -25,7 +26,7 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Check schedule and post
+      - name: Watch the schedule and post
         env:
           RADIOCO_STATION_ID: ${{ vars.RADIOCO_STATION_ID || 'sd72a8fdcd' }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
@@ -37,9 +38,11 @@ jobs:
           COMING_UP_AS: ${{ vars.COMING_UP_AS }}
           LIVE_NOW_AS: ${{ vars.LIVE_NOW_AS }}
           HASHTAGS: ${{ vars.HASHTAGS }}
-        run: python ditch_poster.py
+          POLL_MINUTES: ${{ vars.POLL_MINUTES || '5' }}
+        run: python ditch_poster.py --watch ${{ vars.WATCH_MINUTES || '330' }}
 
       - name: Remember what was posted
+        if: always()
         run: |
           git config user.name "ditch-poster"
           git config user.email "ditch-poster@users.noreply.github.com"
