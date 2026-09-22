@@ -31,18 +31,25 @@
     "31a1f288ffb2:coming_up:story": {
       "at": "2026-09-22T18:04:17.251478+00:00",
       "id": "18124990519890334"
+    },
+    "mixcloud:theditch-chris-bruce-the-improvement-room-episode-2:story": {
+      "at": "2026-09-22T20:22:27.719147+00:00",
+      "seen": true
+    },
+    "mixcloud:theditch-dj-stayhome-homestay-episode-13:story": {
+      "at": "2026-09-22T20:22:28.650265+00:00",
+      "seen": true
+    },
+    "mixcloud:theditch-matt-nida-mostly-listening-22-haruomi-hosono:story": {
+      "at": "2026-09-22T20:22:29.606741+00:00",
+      "seen": true
+    },
+    "mixcloud:theditch-emmet-odonnell-the-weekly-digress-50:story": {
+      "at": "2026-09-22T20:22:30.493281+00:00",
+      "seen": true
     }
   },
   "known": {
-    "f75aed4ed313": {
-      "title": "The Improvement Room",
-      "start": "2026-09-21T19:00:00+00:00",
-      "end": "2026-09-21T20:06:00+00:00",
-      "host": "Chris Bruce",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#fcc419"
-    },
     "8537b7df5aa3": {
       "title": "The Improvement Room",
       "start": "2026-09-22T10:00:00+00:00",
