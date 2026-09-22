@@ -23,7 +23,9 @@ import csv
 import hashlib
 import json
 import os
+import random
 import re
+import subprocess
 import textwrap
 import time
 from dataclasses import dataclass
@@ -94,6 +96,13 @@ CFG = {
     # Instagram won't let automated Stories carry a link sticker, so the card points to the bio
     "link_text": env("CARD_LINK_TEXT", "LINK IN BIO · DITCH.CHANNEL"),
     "logo": env("LOGO_PATH", "assets/logo.png"),
+    # video stories: a random clip from clips/ (or bg*.mp4 next to the script) per Story
+    "video": env_bool("VIDEO_STORIES", True),
+    "clips_dir": env("CLIPS_DIR", "clips"),
+    "video_seconds": int(env("VIDEO_SECONDS", "15")),
+    "crop_pan": env("CROP_PAN", "centre"),  # centre | random
+    # which Stories get a video background; the rest stay still cards
+    "video_kinds": [k.strip() for k in env("VIDEO_KINDS", "coming_up").split(",") if k.strip()],
     # Instagram
     "ig_user_id": env("IG_USER_ID"),
     "ig_token": env("IG_ACCESS_TOKEN"),
@@ -309,7 +318,7 @@ def asset(name: str) -> Image.Image | None:
     return Image.open(p).convert("RGBA") if p.exists() else None
 
 
-def render_card(show: Show, kind: str, fmt: str) -> Path:
+def render_card(show: Show, kind: str, fmt: str, transparent: bool = False) -> Path:
     """Ditch stamp card. kind: coming_up | live_now   fmt: feed (1080x1350) | story (1080x1920)
 
     The show's Radio.co colour fills the background; the black wavy stamp sits on top
@@ -317,7 +326,8 @@ def render_card(show: Show, kind: str, fmt: str) -> Path:
     W, H = (1080, 1350) if fmt == "feed" else (1080, 1920)
     colour = hex_rgb(show.colour or CFG["accent"])
     ink = text_on(colour)
-    img = Image.new("RGB", (W, H), colour)
+    # transparent = just the stamp and its text, to sit over a video background
+    img = Image.new("RGBA", (W, H), (0, 0, 0, 0)) if transparent else Image.new("RGB", (W, H), colour)
 
     stamp = asset("stamp.png")
     sh = int(H * (0.90 if fmt == "feed" else 0.78))
@@ -325,7 +335,7 @@ def render_card(show: Show, kind: str, fmt: str) -> Path:
         sw = int(stamp.width * sh / stamp.height)
         stamp = stamp.resize((sw, sh), Image.LANCZOS)
         sx, sy = (W - sw) // 2, (H - sh) // 2
-        dark = Image.new("RGB", stamp.size, hex_rgb(CFG["bg"]))
+        dark = Image.new("RGBA", stamp.size, hex_rgb(CFG["bg"]) + (255,))
         img.paste(dark, (sx, sy), stamp)
     else:  # no stamp file: plain rounded panel
         sw = int(sh * 0.63)
@@ -412,9 +422,65 @@ def render_card(show: Show, kind: str, fmt: str) -> Path:
 
     OUT.mkdir(exist_ok=True)
     slug = re.sub(r"[^a-z0-9]+", "-", show.title.lower()).strip("-")[:40] or "show"
-    path = OUT / f"{local_start:%Y%m%d-%H%M}-{slug}-{kind}-{fmt}.jpg"
-    img.save(path, "JPEG", quality=92)
+    stem = f"{local_start:%Y%m%d-%H%M}-{slug}-{kind}-{fmt}"
+    if transparent:
+        path = OUT / f"{stem}-overlay.png"
+        img.save(path, "PNG")
+    else:
+        path = OUT / f"{stem}.jpg"
+        img.save(path, "JPEG", quality=92)
     return path
+
+
+def clips() -> list[Path]:
+    """Clips live in clips/, or next to the script as bg*.mp4 (web uploads flatten folders)."""
+    exts = (".mp4", ".mov", ".m4v", ".webm")
+    d = HERE / CFG["clips_dir"]
+    found = sorted(p for p in d.glob("*") if p.suffix.lower() in exts) if d.is_dir() else []
+    return found or sorted(p for p in HERE.glob("bg*") if p.suffix.lower() in exts)
+
+
+def render_video(show: Show, kind: str) -> Path | None:
+    """A random background clip, cropped to 9:16, with the stamp card laid over it."""
+    pool = clips()
+    if not pool:
+        return None
+    clip = random.choice(pool)
+    overlay = render_card(show, kind, "story", transparent=True)
+    out = overlay.with_name(overlay.name.replace("-overlay.png", ".mp4"))
+    secs = int(CFG["video_seconds"])
+    # random moment in the clip, so the same clip looks different each time
+    start = 0.0
+    try:
+        probe = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                                "-of", "csv=p=0", str(clip)], capture_output=True, text=True, timeout=60)
+        dur = float(probe.stdout.strip())
+        start = round(random.uniform(0, max(0, dur - secs)), 2)
+    except Exception:  # noqa: BLE001  a clip shorter than secs just loops from the start
+        pass
+    # centre crop by default: clips are screen recordings, so the edges are the least useful part
+    pan = round(random.uniform(0.15, 0.85), 3) if CFG["crop_pan"] == "random" else 0.5
+    cmd = [
+        "ffmpeg", "-y", "-v", "error",
+        "-ss", str(start), "-stream_loop", "-1", "-i", str(clip),   # loop the clip if it is short
+        "-i", str(overlay),
+        "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",  # silent track: Instagram wants audio
+        "-filter_complex",
+        "[0:v]scale=1080:1920:force_original_aspect_ratio=increase,"
+        f"crop=1080:1920:x=(iw-1080)*{pan}:y=(ih-1920)/2,setsar=1,fps=30[bg];"
+        "[bg][1:v]overlay=0:0:format=auto[v]",
+        "-map", "[v]", "-map", "2:a", "-t", str(secs),
+        "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-pix_fmt", "yuv420p",
+        "-profile:v", "main", "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", str(out),
+    ]
+    try:
+        subprocess.run(cmd, check=True, capture_output=True, timeout=300)
+    except Exception as e:  # noqa: BLE001
+        detail = e.stderr.decode()[-300:] if isinstance(e, subprocess.CalledProcessError) else e
+        log(f"video failed, falling back to a still card ({detail})")
+        return None
+    log(f"video card from {clip.name} at {start:.0f}s")
+    return out
 
 
 def caption(show: Show, kind: str) -> str:
@@ -495,7 +561,8 @@ def ig_post(image_url: str, text: str, fmt: str) -> str:
             raise RuntimeError(f"IG token check failed: {me.text}")
         uid = CFG["ig_user_id"] = str(me.json().get("user_id") or me.json()["id"])
         log(f"Instagram account: @{me.json().get('username', '?')} ({uid})")
-    data = {"image_url": image_url, "access_token": tok}
+    is_video = image_url.lower().split("?")[0].endswith((".mp4", ".mov"))
+    data = {("video_url" if is_video else "image_url"): image_url, "access_token": tok}
     if fmt == "story":
         data["media_type"] = "STORIES"
     else:
@@ -504,7 +571,7 @@ def ig_post(image_url: str, text: str, fmt: str) -> str:
     if not r.ok:
         raise RuntimeError(f"IG create failed: {r.text}")
     creation = r.json()["id"]
-    for _ in range(20):  # wait for Instagram to process the image
+    for _ in range(60 if is_video else 20):  # video takes longer to process
         s = requests.get(f"{base}/{creation}", params={"fields": "status_code", "access_token": tok},
                          timeout=30).json()
         if s.get("status_code") == "FINISHED":
@@ -550,6 +617,8 @@ def announce(show: Show, kind: str, state: dict, dry: bool) -> None:
         if key in state["posted"]:
             continue
         card = render_card(show, kind, fmt)
+        if CFG["video"] and fmt == "story" and kind in CFG["video_kinds"]:
+            card = render_video(show, kind) or card  # falls back to the still card
         text = caption(show, kind)
         if not dry and already_published(card):
             log(f"already posted earlier: {kind} {fmt}: {show.title}")
