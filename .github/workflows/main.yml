@@ -40,7 +40,6 @@ jobs:
           HASHTAGS: ${{ vars.HASHTAGS }}
           VIDEO_STORIES: ${{ vars.VIDEO_STORIES }}
           VIDEO_SECONDS: ${{ vars.VIDEO_SECONDS }}
-          # weekly line-up and Mixcloud listen-back posts
           EXTRAS: ${{ vars.EXTRAS }}
           WEEKLY_AS: ${{ vars.WEEKLY_AS }}
           WEEKLY_DAY: ${{ vars.WEEKLY_DAY }}
