@@ -50,17 +50,6 @@ jobs:
           LISTEN_BACK_AS: ${{ vars.LISTEN_BACK_AS }}
           LISTEN_BACK_VIDEO: ${{ vars.LISTEN_BACK_VIDEO }}
           MAX_LISTEN_BACK_PER_RUN: ${{ vars.MAX_LISTEN_BACK_PER_RUN }}
-          VIDEO_STORIES: ${{ vars.VIDEO_STORIES }}
-          VIDEO_SECONDS: ${{ vars.VIDEO_SECONDS }}
-          EXTRAS: ${{ vars.EXTRAS }}
-          WEEKLY_AS: ${{ vars.WEEKLY_AS }}
-          WEEKLY_DAY: ${{ vars.WEEKLY_DAY }}
-          WEEKLY_HOUR: ${{ vars.WEEKLY_HOUR }}
-          WEEKLY_VIDEO: ${{ vars.WEEKLY_VIDEO }}
-          MIXCLOUD_USER: ${{ vars.MIXCLOUD_USER }}
-          LISTEN_BACK_AS: ${{ vars.LISTEN_BACK_AS }}
-          LISTEN_BACK_VIDEO: ${{ vars.LISTEN_BACK_VIDEO }}
-          MAX_LISTEN_BACK_PER_RUN: ${{ vars.MAX_LISTEN_BACK_PER_RUN }}
           POLL_MINUTES: ${{ vars.POLL_MINUTES || '5' }}
         run: python ditch_poster.py --watch ${{ vars.WATCH_MINUTES || '330' }}
 
