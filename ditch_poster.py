@@ -529,9 +529,14 @@ def publish_image(path: Path) -> str:
     if r.status_code not in (200, 201, 422):  # 422 = already exists
         r.raise_for_status()
     url = f"https://raw.githubusercontent.com/{repo}/{branch}/{remote}"
-    for _ in range(10):  # wait until it's actually served
-        if requests.head(url, timeout=15).status_code == 200:
-            break
+    for _ in range(20):  # wait until it is really served, with the right type and size
+        try:
+            r = requests.get(url, timeout=20)
+            if (r.status_code == 200 and len(r.content) > 1000
+                    and r.headers.get("content-type", "").split("/")[0] in ("image", "video")):
+                break
+        except Exception:  # noqa: BLE001
+            pass
         time.sleep(3)
     return url
 
@@ -589,10 +594,19 @@ def ig_post(image_url: str, text: str, fmt: str) -> str:
         data["media_type"] = "STORIES"
     else:
         data["caption"] = text
-    r = requests.post(f"{base}/{uid}/media", data=data, timeout=60)
-    if not r.ok:
-        raise RuntimeError(f"IG create failed: {r.text}")
-    creation = r.json()["id"]
+    creation = None
+    for attempt in range(4):
+        r = requests.post(f"{base}/{uid}/media", data=data, timeout=60)
+        if r.ok:
+            creation = r.json()["id"]
+            break
+        # 9004 / 2207052 = "media could not be fetched from this URI": the card was pushed
+        # moments ago and Instagram's fetcher has not seen it yet, so wait and try again
+        fetch_problem = '"code":9004' in r.text or "2207052" in r.text
+        if not fetch_problem or attempt == 3:
+            raise RuntimeError(f"IG create failed: {r.text}")
+        log(f"Instagram could not fetch the card yet, retrying in 20s (attempt {attempt + 1})")
+        time.sleep(20)
     for _ in range(60 if is_video else 20):  # video takes longer to process
         s = requests.get(f"{base}/{creation}", params={"fields": "status_code", "access_token": tok},
                          timeout=30).json()
