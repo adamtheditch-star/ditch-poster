@@ -63,18 +63,17 @@
     "6c43a8ecde1e:coming_up:story": {
       "at": "2026-09-23T18:06:52.277222+00:00",
       "id": "17991950967050092"
+    },
+    "30ba46ba4a37:coming_up:story": {
+      "at": "2026-09-24T09:04:00.407821+00:00",
+      "id": "18431218240197231"
+    },
+    "30ba46ba4a37:live_now:story": {
+      "at": "2026-09-24T10:04:52.375852+00:00",
+      "id": "18423270085149255"
     }
   },
   "known": {
-    "0d504a2885c6": {
-      "title": "The Weekly Digress",
-      "start": "2026-09-23T10:00:00+00:00",
-      "end": "2026-09-23T11:00:00+00:00",
-      "host": "Emmet O'Donnell",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#20c997"
-    },
     "6c43a8ecde1e": {
       "title": "Mostly Listening",
       "start": "2026-09-23T19:00:00+00:00",
