@@ -78,15 +78,6 @@
     }
   },
   "known": {
-    "6c43a8ecde1e": {
-      "title": "Mostly Listening",
-      "start": "2026-09-23T19:00:00+00:00",
-      "end": "2026-09-23T20:08:00+00:00",
-      "host": "Matt Nida",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#5c7cfa"
-    },
     "30ba46ba4a37": {
       "title": "Mostly Listening",
       "start": "2026-09-24T10:00:00+00:00",
@@ -212,6 +203,15 @@
       "image_url": "",
       "source": "radioco",
       "colour": "#339af0"
+    },
+    "0ff5687f568a": {
+      "title": "Pausa",
+      "start": "2026-09-25T08:30:00+00:00",
+      "end": "2026-09-25T09:30:00+00:00",
+      "host": "bonz",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#22b8cf"
     }
   }
 }
