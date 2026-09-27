@@ -103,27 +103,37 @@
     "fb74ef052f3a:coming_up:story": {
       "at": "2026-09-26T09:06:04.887339+00:00",
       "id": "17904397860591396"
+    },
+    "mixcloud:theditch-emmet-odonnell-the-weekly-digress-51:story": {
+      "at": "2026-09-27T14:03:17.488864+00:00",
+      "id": "18463358836191163"
+    },
+    "mixcloud:theditch-matt-nida-mostly-listening-23-vaporwave:story": {
+      "at": "2026-09-27T14:05:20.381543+00:00",
+      "id": "18343906249269462"
+    },
+    "mixcloud:theditch-dj-stayhome-homestay-episode-14:story": {
+      "at": "2026-09-27T14:07:07.251655+00:00",
+      "id": "17929719381166629"
+    },
+    "mixcloud:theditch-chris-bruce-the-improvement-room-episode-3:story": {
+      "at": "2026-09-27T14:13:55.834573+00:00",
+      "id": "17959571076207533"
+    },
+    "mixcloud:theditch-adam-clarke-on-the-hop-22nd-september:story": {
+      "at": "2026-09-27T14:15:57.411173+00:00",
+      "id": "18117052481097769"
+    },
+    "mixcloud:theditch-adam-clarke-on-the-hop-23rd-september:story": {
+      "at": "2026-09-27T14:17:45.238406+00:00",
+      "id": "18135364414651898"
+    },
+    "mixcloud:theditch-bonz-pausa-25th-september-2026:story": {
+      "at": "2026-09-27T14:19:41.985548+00:00",
+      "id": "18086740508282486"
     }
   },
   "known": {
-    "fb74ef052f3a": {
-      "title": "The Ditch Omnibus",
-      "start": "2026-09-26T10:00:00+00:00",
-      "end": "2026-09-26T14:22:00+00:00",
-      "host": "",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#339af0"
-    },
-    "40ae32db9485": {
-      "title": "The Ditch Omnibus",
-      "start": "2026-09-26T09:00:00+00:00",
-      "end": "2026-09-26T16:10:00+00:00",
-      "host": "",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#339af0"
-    },
     "a5fcfdffa8b0": {
       "title": "The Improvement Room",
       "start": "2026-09-28T19:00:00+00:00",
