@@ -214,6 +214,78 @@
       "image_url": "",
       "source": "radioco",
       "colour": "#339af0"
+    },
+    "4eb22150b46d": {
+      "title": "The Improvement Room",
+      "start": "2026-10-05T19:00:00+00:00",
+      "end": "2026-10-05T20:00:00+00:00",
+      "host": "Chris Bruce",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#fcc419"
+    },
+    "30b811d90913": {
+      "title": "The Improvement Room",
+      "start": "2026-10-06T10:00:00+00:00",
+      "end": "2026-10-06T11:00:00+00:00",
+      "host": "Chris Bruce",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#fcc419"
+    },
+    "1670b38592cb": {
+      "title": "The Weekly Digress",
+      "start": "2026-10-06T19:00:00+00:00",
+      "end": "2026-10-06T20:00:00+00:00",
+      "host": "Emmet O'Donnell",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#20c997"
+    },
+    "12f4230c43f4": {
+      "title": "The Weekly Digress",
+      "start": "2026-10-07T10:00:00+00:00",
+      "end": "2026-10-07T11:00:00+00:00",
+      "host": "Emmet O'Donnell",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#20c997"
+    },
+    "815240e306c9": {
+      "title": "Mostly Listening",
+      "start": "2026-10-08T10:00:00+00:00",
+      "end": "2026-10-08T11:00:00+00:00",
+      "host": "Matt Nida",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#5c7cfa"
+    },
+    "00d24f1d6b81": {
+      "title": "HomeStay",
+      "start": "2026-10-08T19:00:00+00:00",
+      "end": "2026-10-08T20:00:00+00:00",
+      "host": "DJ Stayhome",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#cc5de8"
+    },
+    "684c26b21c18": {
+      "title": "HomeStay",
+      "start": "2026-10-09T10:00:00+00:00",
+      "end": "2026-10-09T11:00:00+00:00",
+      "host": "DJ Stayhome",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#cc5de8"
+    },
+    "f3eb82487c57": {
+      "title": "The Ditch Omnibus",
+      "start": "2026-10-10T10:00:00+00:00",
+      "end": "2026-10-10T14:00:00+00:00",
+      "host": "",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#339af0"
     }
   }
 }
