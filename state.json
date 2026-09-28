@@ -155,6 +155,18 @@
     "c014e8784a1a:coming_up:story": {
       "at": "2026-09-28T16:04:43.128103+00:00",
       "id": "17993003838021049"
+    },
+    "a5fcfdffa8b0:coming_up:story": {
+      "at": "2026-09-28T18:31:55.114597+00:00",
+      "id": "17960399808213143"
+    },
+    "a5fcfdffa8b0:live_now:story": {
+      "at": "2026-09-28T19:02:26.796601+00:00",
+      "id": "18593779162064413"
+    },
+    "d8aea65edbb9:live_now:story": {
+      "at": "2026-09-28T19:07:40.122770+00:00",
+      "id": "18106434788194669"
     }
   },
   "known": {
@@ -179,7 +191,7 @@
     "0624c94bb5de": {
       "title": "The Weekly Digress",
       "start": "2026-09-29T19:00:00+00:00",
-      "end": "2026-09-29T20:00:00+00:00",
+      "end": "2026-09-29T21:00:00+00:00",
       "host": "Emmet O'Donnell",
       "image_url": "",
       "source": "radioco",
@@ -188,7 +200,7 @@
     "ee4281de042c": {
       "title": "The Weekly Digress",
       "start": "2026-09-30T10:00:00+00:00",
-      "end": "2026-09-30T11:00:00+00:00",
+      "end": "2026-09-30T12:00:00+00:00",
       "host": "Emmet O'Donnell",
       "image_url": "",
       "source": "radioco",
@@ -337,6 +349,15 @@
       "image_url": "",
       "source": "radioco",
       "colour": "#f06595"
+    },
+    "d8aea65edbb9": {
+      "title": "The Improvement Room",
+      "start": "2026-09-28T19:05:00+00:00",
+      "end": "2026-09-28T20:23:00+00:00",
+      "host": "Chris Bruce",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#fcc419"
     }
   }
 }
