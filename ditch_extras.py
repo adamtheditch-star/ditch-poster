@@ -225,24 +225,54 @@ def render_listen_back(title: str, host: str, art_url: str, fmt: str = "story",
     draw.text((x0 + 28, y + bh // 2), "LISTEN BACK", font=bf, fill=text_on(colour), anchor="lm")
     y += bh + 40
 
-    if art:  # a sharp square of the mix artwork
-        side = int(inner * 0.55)
-        img.paste(ImageOps.fit(art, (side, side)), (x0, y))
-        y += side + 40
-
-    tf, lines = fit_text(draw, title.upper(), inner, 3, 110, 44)
-    for line in lines:
-        draw.text((x0, y), line, font=tf, fill=fg)
-        y += int(tf.size * 1.05)
-    if host:  # already worded by the caller: "with Chris Bruce", or an episode subtitle
-        draw.text((x0, y + 16), host, font=font(44, bold=False), fill=fg)
-
+    # the bottom pill is fixed, so everything above it has to be fitted to the room that is
+    # left. Mixcloud titles run long ("Mostly Listening 22 - Haruomi Hosono"), and a long one
+    # over a full-size artwork square used to run straight through the pill.
     bottom = sy + int(sh * 0.88)
     uf = font(30)
     ph = int(uf.size * 1.9)
     label = dp.env("MIXCLOUD_LINK_TEXT", "FULL SHOW ON MIXCLOUD · LINK IN BIO")
     while draw.textlength(label, font=uf) + 56 > inner and uf.size > 18:
         uf = font(uf.size - 2)
+
+    floor = bottom - ph - 36          # nothing may cross this line
+    room = floor - y
+    hf = font(44, bold=False)
+    while host and draw.textlength(host, font=hf) > inner and hf.size > 24:
+        hf = font(hf.size - 2, bold=False)   # a long host name must not run past the stamp
+    host_h = int(hf.size * 1.3) + 16 if host else 0
+
+    # hold the artwork at a steady size so a batch of these looks consistent in the feed, and
+    # let the title take the strain; only a really long title starts eating into the artwork
+    fit = None
+    for frac in ((0.55, 0.48, 0.40, 0.32, 0.0) if art else (0.0,)):
+        side = int(inner * frac)
+        gap = 40 if side else 0
+        for start, low in ((110, 44), (96, 40), (84, 36), (72, 32), (60, 28), (48, 24)):
+            tf, lines = fit_text(draw, title.upper(), inner, 3, start, low)
+            title_h = int(len(lines) * tf.size * 1.05)
+            if side + gap + title_h + host_h <= room:
+                fit = (tf, lines, side)
+                break
+        if fit:
+            break
+    if not fit:  # nothing fits: smallest type, no artwork, and let the title clip rather than overlap
+        tf, lines = fit_text(draw, title.upper(), inner, 3, 48, 24)
+        fit = (tf, lines, 0)
+    tf, lines, side = fit
+
+    if side:
+        img.paste(ImageOps.fit(art, (side, side)), (x0, y))
+        y += side + 40
+    else:  # no artwork to fill the space: sit the text in the middle of it instead
+        y += max(0, (room - int(len(lines) * tf.size * 1.05) - host_h) // 2)
+
+    for line in lines:
+        draw.text((x0, y), line, font=tf, fill=fg)
+        y += int(tf.size * 1.05)
+    if host:  # already worded by the caller: "with Chris Bruce", or an episode subtitle
+        draw.text((x0, y + 16), host, font=hf, fill=fg)
+
     pw = int(draw.textlength(label, font=uf)) + 56
     draw.rounded_rectangle((x0, bottom - ph, x0 + pw, bottom), radius=ph // 2, fill=colour)
     draw.text((x0 + 28, bottom - ph // 2), label, font=uf, fill=text_on(colour), anchor="lm")
