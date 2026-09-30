@@ -179,18 +179,17 @@
     "0624c94bb5de:live_now:story": {
       "at": "2026-09-29T19:01:13.612148+00:00",
       "id": "17960127755999764"
+    },
+    "ee4281de042c:coming_up:story": {
+      "at": "2026-09-30T09:02:06.180900+00:00",
+      "id": "18021117272930367"
+    },
+    "ee4281de042c:live_now:story": {
+      "at": "2026-09-30T10:02:30.491507+00:00",
+      "id": "18096755219386557"
     }
   },
   "known": {
-    "7eea77817f64": {
-      "title": "The Improvement Room",
-      "start": "2026-09-29T10:00:00+00:00",
-      "end": "2026-09-29T11:18:00+00:00",
-      "host": "Chris Bruce",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#fcc419"
-    },
     "0624c94bb5de": {
       "title": "The Weekly Digress",
       "start": "2026-09-29T19:00:00+00:00",
