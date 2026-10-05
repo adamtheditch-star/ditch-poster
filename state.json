@@ -255,13 +255,33 @@
     "mixcloud:theditch-emmet-odonnell-the-weekly-digress-52-1st-anniversary:story": {
       "at": "2026-10-04T13:56:55.263022+00:00",
       "id": "18117057481959601"
+    },
+    "weekly:20261005:feed": {
+      "at": "2026-10-05T09:01:04.124710+00:00",
+      "id": "17992882077021580"
+    },
+    "weekly:20261005:story": {
+      "at": "2026-10-05T09:01:21.861026+00:00",
+      "id": "18128990938749548"
+    },
+    "9e37f764285e:coming_up:story": {
+      "at": "2026-10-05T10:06:16.232700+00:00",
+      "id": "18252938566307937"
+    },
+    "9e37f764285e:live_now:story": {
+      "at": "2026-10-05T11:01:47.030101+00:00",
+      "id": "17891075640615342"
+    },
+    "0759a712041d:live_now:story": {
+      "at": "2026-10-05T12:02:17.500714+00:00",
+      "id": "18073126571749492"
     }
   },
   "known": {
     "4eb22150b46d": {
       "title": "The Improvement Room",
       "start": "2026-10-05T19:00:00+00:00",
-      "end": "2026-10-05T20:00:00+00:00",
+      "end": "2026-10-05T20:09:00+00:00",
       "host": "Chris Bruce",
       "image_url": "",
       "source": "radioco",
@@ -270,7 +290,7 @@
     "30b811d90913": {
       "title": "The Improvement Room",
       "start": "2026-10-06T10:00:00+00:00",
-      "end": "2026-10-06T11:00:00+00:00",
+      "end": "2026-10-06T11:09:00+00:00",
       "host": "Chris Bruce",
       "image_url": "",
       "source": "radioco",
@@ -419,6 +439,51 @@
       "image_url": "",
       "source": "radioco",
       "colour": "#339af0"
+    },
+    "9e37f764285e": {
+      "title": "On The Hop",
+      "start": "2026-10-05T11:00:00+00:00",
+      "end": "2026-10-05T12:00:00+00:00",
+      "host": "Adam Clarke",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#f06595"
+    },
+    "f7f4d75f786f": {
+      "title": "Pausa",
+      "start": "2026-10-09T08:30:00+00:00",
+      "end": "2026-10-09T09:30:00+00:00",
+      "host": "bonz",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#22b8cf"
+    },
+    "989d1910e19c": {
+      "title": "What I Might Play",
+      "start": "2026-10-09T14:00:00+00:00",
+      "end": "2026-10-09T15:00:00+00:00",
+      "host": "Eamon Sweeney",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#20c997"
+    },
+    "04c51e558dc7": {
+      "title": "On The Hop",
+      "start": "2026-10-12T11:00:00+00:00",
+      "end": "2026-10-12T12:00:00+00:00",
+      "host": "Adam Clarke",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#f06595"
+    },
+    "e9517862a2f6": {
+      "title": "Pausa",
+      "start": "2026-10-16T08:30:00+00:00",
+      "end": "2026-10-16T09:30:00+00:00",
+      "host": "bonz",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#22b8cf"
     }
   }
 }
