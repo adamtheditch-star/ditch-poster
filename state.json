@@ -338,6 +338,87 @@
       "image_url": "",
       "source": "radioco",
       "colour": "#5c7cfa"
+    },
+    "2c6f760cf672": {
+      "title": "The Improvement Room",
+      "start": "2026-10-12T19:00:00+00:00",
+      "end": "2026-10-12T20:00:00+00:00",
+      "host": "Chris Bruce",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#fcc419"
+    },
+    "5483b2db56cb": {
+      "title": "The Improvement Room",
+      "start": "2026-10-13T10:00:00+00:00",
+      "end": "2026-10-13T11:00:00+00:00",
+      "host": "Chris Bruce",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#fcc419"
+    },
+    "d9d9a70ae717": {
+      "title": "The Weekly Digress",
+      "start": "2026-10-13T19:00:00+00:00",
+      "end": "2026-10-13T20:00:00+00:00",
+      "host": "Emmet O'Donnell",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#20c997"
+    },
+    "1c1c3677702d": {
+      "title": "The Weekly Digress",
+      "start": "2026-10-14T10:00:00+00:00",
+      "end": "2026-10-14T11:00:00+00:00",
+      "host": "Emmet O'Donnell",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#20c997"
+    },
+    "8372ee62e2e1": {
+      "title": "Mostly Listening",
+      "start": "2026-10-14T19:00:00+00:00",
+      "end": "2026-10-14T20:00:00+00:00",
+      "host": "Matt Nida",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#5c7cfa"
+    },
+    "a8b9f46f7eca": {
+      "title": "Mostly Listening",
+      "start": "2026-10-15T10:00:00+00:00",
+      "end": "2026-10-15T11:00:00+00:00",
+      "host": "Matt Nida",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#5c7cfa"
+    },
+    "d458827b7b68": {
+      "title": "HomeStay",
+      "start": "2026-10-15T19:00:00+00:00",
+      "end": "2026-10-15T20:00:00+00:00",
+      "host": "DJ Stayhome",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#cc5de8"
+    },
+    "d30d9694cad5": {
+      "title": "HomeStay",
+      "start": "2026-10-16T10:00:00+00:00",
+      "end": "2026-10-16T11:00:00+00:00",
+      "host": "DJ Stayhome",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#cc5de8"
+    },
+    "5adc503c441e": {
+      "title": "The Ditch Omnibus",
+      "start": "2026-10-17T10:00:00+00:00",
+      "end": "2026-10-17T14:00:00+00:00",
+      "host": "",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#339af0"
     }
   }
 }
