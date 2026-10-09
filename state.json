@@ -262,15 +262,6 @@
     }
   },
   "known": {
-    "00d24f1d6b81": {
-      "title": "HomeStay",
-      "start": "2026-10-08T19:00:00+00:00",
-      "end": "2026-10-08T20:08:00+00:00",
-      "host": "DJ Stayhome",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#cc5de8"
-    },
     "684c26b21c18": {
       "title": "HomeStay",
       "start": "2026-10-09T10:00:00+00:00",
@@ -328,7 +319,7 @@
     "8372ee62e2e1": {
       "title": "Mostly Listening",
       "start": "2026-10-14T19:00:00+00:00",
-      "end": "2026-10-14T20:00:00+00:00",
+      "end": "2026-10-14T20:21:00+00:00",
       "host": "Matt Nida",
       "image_url": "",
       "source": "radioco",
@@ -337,7 +328,7 @@
     "a8b9f46f7eca": {
       "title": "Mostly Listening",
       "start": "2026-10-15T10:00:00+00:00",
-      "end": "2026-10-15T11:00:00+00:00",
+      "end": "2026-10-15T11:21:00+00:00",
       "host": "Matt Nida",
       "image_url": "",
       "source": "radioco",
