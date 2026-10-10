@@ -1,17 +1,5 @@
 {
   "posted": {
-    "40ae32db9485:coming_up:story": {
-      "at": "2026-09-26T08:03:44.808734+00:00",
-      "id": "18143254255586829"
-    },
-    "40ae32db9485:live_now:story": {
-      "at": "2026-09-26T09:04:09.722239+00:00",
-      "id": "18074954360443484"
-    },
-    "fb74ef052f3a:coming_up:story": {
-      "at": "2026-09-26T09:06:04.887339+00:00",
-      "id": "17904397860591396"
-    },
     "mixcloud:theditch-emmet-odonnell-the-weekly-digress-51:story": {
       "at": "2026-09-27T14:03:17.488864+00:00",
       "id": "18463358836191163"
@@ -259,18 +247,17 @@
     "989d1910e19c:live_now:story": {
       "at": "2026-10-09T14:00:56.432302+00:00",
       "id": "18448396426120879"
+    },
+    "f3eb82487c57:coming_up:story": {
+      "at": "2026-10-10T09:30:28.236319+00:00",
+      "id": "18135074866643813"
+    },
+    "f3eb82487c57:live_now:story": {
+      "at": "2026-10-10T10:00:49.151830+00:00",
+      "id": "18145943089560370"
     }
   },
   "known": {
-    "684c26b21c18": {
-      "title": "HomeStay",
-      "start": "2026-10-09T10:00:00+00:00",
-      "end": "2026-10-09T11:08:00+00:00",
-      "host": "DJ Stayhome",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#cc5de8"
-    },
     "f3eb82487c57": {
       "title": "The Ditch Omnibus",
       "start": "2026-10-10T10:00:00+00:00",
@@ -361,15 +348,6 @@
       "source": "radioco",
       "colour": "#339af0"
     },
-    "f7f4d75f786f": {
-      "title": "Pausa",
-      "start": "2026-10-09T08:30:00+00:00",
-      "end": "2026-10-09T09:30:00+00:00",
-      "host": "bonz",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#22b8cf"
-    },
     "989d1910e19c": {
       "title": "What I Might Play",
       "start": "2026-10-09T14:00:00+00:00",
@@ -400,7 +378,7 @@
     "50e7b49cb047": {
       "title": "The Ditch Omnibus",
       "start": "2026-10-10T09:00:00+00:00",
-      "end": "2026-10-10T14:00:00+00:00",
+      "end": "2026-10-10T15:36:00+00:00",
       "host": "",
       "image_url": "",
       "source": "radioco",
