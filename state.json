@@ -223,6 +223,26 @@
     "5adc503c441e:live_now:story": {
       "at": "2026-10-17T10:02:35.611021+00:00",
       "id": "17993601522050562"
+    },
+    "mixcloud:theditch-matt-nida-mostly-listening-26-jean-michel-jarre:story": {
+      "at": "2026-10-18T19:50:43.447870+00:00",
+      "id": "18393327412167779"
+    },
+    "mixcloud:theditch-dj-stayhome-homestay-episode-17:story": {
+      "at": "2026-10-18T19:52:42.256421+00:00",
+      "id": "18078600773413164"
+    },
+    "mixcloud:theditch-graham-phillips-the-weekly-digress-54:story": {
+      "at": "2026-10-18T19:54:41.092978+00:00",
+      "id": "17908447494569065"
+    },
+    "mixcloud:theditch-bonz-pausa-16th-october-2026:story": {
+      "at": "2026-10-18T19:56:41.444649+00:00",
+      "id": "18166737703492020"
+    },
+    "mixcloud:theditch-chris-bruce-the-improvement-room-episode-6:story": {
+      "at": "2026-10-18T20:03:42.950588+00:00",
+      "id": "18088514390299602"
     }
   },
   "known": {
@@ -238,7 +258,7 @@
     "8c259a2edcbc": {
       "title": "The Improvement Room",
       "start": "2026-10-19T19:00:00+00:00",
-      "end": "2026-10-19T20:00:00+00:00",
+      "end": "2026-10-19T20:12:00+00:00",
       "host": "Chris Bruce",
       "image_url": "",
       "source": "radioco",
@@ -247,7 +267,7 @@
     "3a5c31c8dcdc": {
       "title": "The Improvement Room",
       "start": "2026-10-20T10:00:00+00:00",
-      "end": "2026-10-20T11:00:00+00:00",
+      "end": "2026-10-20T11:12:00+00:00",
       "host": "Chris Bruce",
       "image_url": "",
       "source": "radioco",
