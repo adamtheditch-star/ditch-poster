@@ -1,9 +1,5 @@
 {
   "posted": {
-    "1670b38592cb:live_now:story": {
-      "at": "2026-10-06T19:03:29.828457+00:00",
-      "id": "18005084876792722"
-    },
     "12f4230c43f4:coming_up:story": {
       "at": "2026-10-07T09:55:02.778834+00:00",
       "id": "17912782161283463"
@@ -238,15 +234,6 @@
     }
   },
   "known": {
-    "8c259a2edcbc": {
-      "title": "The Improvement Room",
-      "start": "2026-10-19T19:00:00+00:00",
-      "end": "2026-10-19T20:12:00+00:00",
-      "host": "Chris Bruce",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#fcc419"
-    },
     "3a5c31c8dcdc": {
       "title": "The Improvement Room",
       "start": "2026-10-20T10:00:00+00:00",
