@@ -1,9 +1,5 @@
 {
   "posted": {
-    "50c3d57623c3:live_now:story": {
-      "at": "2026-10-07T19:00:28.112605+00:00",
-      "id": "18125161712297153"
-    },
     "815240e306c9:live_now:story": {
       "at": "2026-10-08T10:05:07.810051+00:00",
       "id": "18568276180073482"
@@ -238,15 +234,6 @@
     }
   },
   "known": {
-    "52a5a0bb5db6": {
-      "title": "The Weekly Digress",
-      "start": "2026-10-20T19:00:00+00:00",
-      "end": "2026-10-20T20:25:00+00:00",
-      "host": "Emmet O'Donnell",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#20c997"
-    },
     "7ee9ee9ac398": {
       "title": "The Weekly Digress",
       "start": "2026-10-21T10:00:00+00:00",
@@ -277,7 +264,7 @@
     "e72d08314c28": {
       "title": "HomeStay",
       "start": "2026-10-22T19:00:00+00:00",
-      "end": "2026-10-22T20:00:00+00:00",
+      "end": "2026-10-22T20:10:00+00:00",
       "host": "DJ Stayhome",
       "image_url": "",
       "source": "radioco",
@@ -295,7 +282,7 @@
     "3119066dd53b": {
       "title": "HomeStay",
       "start": "2026-10-23T10:00:00+00:00",
-      "end": "2026-10-23T11:00:00+00:00",
+      "end": "2026-10-23T11:10:00+00:00",
       "host": "DJ Stayhome",
       "image_url": "",
       "source": "radioco",
