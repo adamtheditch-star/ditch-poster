@@ -1,9 +1,5 @@
 {
   "posted": {
-    "00d24f1d6b81:live_now:story": {
-      "at": "2026-10-08T19:02:09.938631+00:00",
-      "id": "18119803051941785"
-    },
     "f7f4d75f786f:coming_up:story": {
       "at": "2026-10-09T07:32:37.536278+00:00",
       "id": "17913858123523725"
@@ -238,15 +234,6 @@
     }
   },
   "known": {
-    "294687f65e43": {
-      "title": "Mostly Listening",
-      "start": "2026-10-21T19:00:00+00:00",
-      "end": "2026-10-21T20:24:00+00:00",
-      "host": "Matt Nida",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#5c7cfa"
-    },
     "7f1a5e8a74d7": {
       "title": "Mostly Listening",
       "start": "2026-10-22T10:00:00+00:00",
