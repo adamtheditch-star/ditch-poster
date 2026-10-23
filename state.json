@@ -258,15 +258,6 @@
     }
   },
   "known": {
-    "e72d08314c28": {
-      "title": "HomeStay",
-      "start": "2026-10-22T19:00:00+00:00",
-      "end": "2026-10-22T20:10:00+00:00",
-      "host": "DJ Stayhome",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#cc5de8"
-    },
     "a68f42e067be": {
       "title": "Pausa",
       "start": "2026-10-23T08:30:00+00:00",
@@ -288,7 +279,7 @@
     "cb7d8ce1b2f9": {
       "title": "The Ditch Omnibus",
       "start": "2026-10-24T09:00:00+00:00",
-      "end": "2026-10-24T14:00:00+00:00",
+      "end": "2026-10-24T16:18:00+00:00",
       "host": "",
       "image_url": "",
       "source": "radioco",
