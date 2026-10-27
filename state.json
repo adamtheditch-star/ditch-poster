@@ -271,18 +271,13 @@
     "fcee29c03196:coming_up:story": {
       "at": "2026-10-27T19:04:03.841463+00:00",
       "id": "18133477201744226"
+    },
+    "fcee29c03196:live_now:story": {
+      "at": "2026-10-27T20:04:28.890028+00:00",
+      "id": "18121499929943481"
     }
   },
   "known": {
-    "1592482fd057": {
-      "title": "The Improvement Room",
-      "start": "2026-10-26T20:00:00+00:00",
-      "end": "2026-10-26T21:00:00+00:00",
-      "host": "Chris Bruce",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#fcc419"
-    },
     "91dfd7f7707a": {
       "title": "The Improvement Room",
       "start": "2026-10-27T11:00:00+00:00",
@@ -430,7 +425,7 @@
     "9d1d9314b084": {
       "title": "HomeStay",
       "start": "2026-11-05T20:00:00+00:00",
-      "end": "2026-11-05T21:00:00+00:00",
+      "end": "2026-11-05T21:09:00+00:00",
       "host": "DJ Stayhome",
       "image_url": "",
       "source": "radioco",
@@ -448,7 +443,7 @@
     "de96a63cb23f": {
       "title": "HomeStay",
       "start": "2026-11-06T11:00:00+00:00",
-      "end": "2026-11-06T12:00:00+00:00",
+      "end": "2026-11-06T12:09:00+00:00",
       "host": "DJ Stayhome",
       "image_url": "",
       "source": "radioco",
@@ -480,6 +475,15 @@
       "image_url": "",
       "source": "radioco",
       "colour": "#ff6b6b"
+    },
+    "b04a7eeb72f4": {
+      "title": "On The Hop",
+      "start": "2026-10-28T12:00:00+00:00",
+      "end": "2026-10-28T13:00:00+00:00",
+      "host": "Adam Clarke",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#f06595"
     }
   }
 }
