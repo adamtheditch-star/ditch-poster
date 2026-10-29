@@ -1,13 +1,5 @@
 {
   "posted": {
-    "a8b9f46f7eca:coming_up:story": {
-      "at": "2026-10-15T09:06:11.668164+00:00",
-      "id": "17990296220865272"
-    },
-    "a8b9f46f7eca:live_now:story": {
-      "at": "2026-10-15T10:01:40.848831+00:00",
-      "id": "18336130666272914"
-    },
     "d458827b7b68:coming_up:story": {
       "at": "2026-10-15T18:14:11.425726+00:00",
       "seen": true
@@ -283,18 +275,17 @@
     "f91cc155350c:live_now:story": {
       "at": "2026-10-28T20:04:52.821765+00:00",
       "id": "18027639743860528"
+    },
+    "0cd97728ac4e:coming_up:story": {
+      "at": "2026-10-29T10:03:18.697018+00:00",
+      "id": "18101124179638973"
+    },
+    "0cd97728ac4e:live_now:story": {
+      "at": "2026-10-29T11:03:54.635263+00:00",
+      "id": "18411659551091506"
     }
   },
   "known": {
-    "30bdac8b2229": {
-      "title": "The Weekly Digress",
-      "start": "2026-10-28T11:00:00+00:00",
-      "end": "2026-10-28T12:00:00+00:00",
-      "host": "Emmet O'Donnell",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#20c997"
-    },
     "f91cc155350c": {
       "title": "Mostly Listening",
       "start": "2026-10-28T20:00:00+00:00",
@@ -456,15 +447,6 @@
       "image_url": "",
       "source": "radioco",
       "colour": "#ff6b6b"
-    },
-    "b04a7eeb72f4": {
-      "title": "On The Hop",
-      "start": "2026-10-28T12:00:00+00:00",
-      "end": "2026-10-28T13:00:00+00:00",
-      "host": "Adam Clarke",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#f06595"
     }
   }
 }
