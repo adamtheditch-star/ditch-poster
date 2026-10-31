@@ -286,15 +286,6 @@
     }
   },
   "known": {
-    "5d38822200f7": {
-      "title": "HomeStay",
-      "start": "2026-10-29T20:00:00+00:00",
-      "end": "2026-10-29T21:09:00+00:00",
-      "host": "DJ Stayhome",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#cc5de8"
-    },
     "ce5efdd673c9": {
       "title": "Pausa",
       "start": "2026-10-30T09:30:00+00:00",
