@@ -1,17 +1,5 @@
 {
   "posted": {
-    "7ee9ee9ac398:coming_up:story": {
-      "at": "2026-10-21T09:04:50.130080+00:00",
-      "id": "18573364165076186"
-    },
-    "7ee9ee9ac398:live_now:story": {
-      "at": "2026-10-21T10:00:19.437603+00:00",
-      "id": "18081783869354520"
-    },
-    "5941cd3047c8:live_now:story": {
-      "at": "2026-10-21T13:29:01.869101+00:00",
-      "id": "18068179247523368"
-    },
     "294687f65e43:coming_up:story": {
       "at": "2026-10-21T18:02:43.364232+00:00",
       "id": "18185329453423793"
@@ -311,18 +299,25 @@
     "d2c8454305c9:live_now:story": {
       "at": "2026-11-04T00:04:04.134006+00:00",
       "id": "17915340513286530"
+    },
+    "e5563d77f170:coming_up:story": {
+      "at": "2026-11-04T10:02:42.126422+00:00",
+      "id": "18201581254391125"
+    },
+    "e5563d77f170:live_now:story": {
+      "at": "2026-11-04T11:03:10.335176+00:00",
+      "id": "17956440978037708"
+    },
+    "884350d772c4:coming_up:story": {
+      "at": "2026-11-04T11:05:24.537992+00:00",
+      "id": "18125586020091862"
+    },
+    "884350d772c4:live_now:story": {
+      "at": "2026-11-04T12:00:56.109089+00:00",
+      "id": "17994111786058343"
     }
   },
   "known": {
-    "39fabd1001cb": {
-      "title": "The Improvement Room",
-      "start": "2026-11-03T11:00:00+00:00",
-      "end": "2026-11-03T12:06:00+00:00",
-      "host": "Chris Bruce",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#fcc419"
-    },
     "0bdd7b1f2446": {
       "title": "The Weekly Digress",
       "start": "2026-11-03T20:00:00+00:00",
@@ -394,15 +389,6 @@
       "image_url": "",
       "source": "radioco",
       "colour": "#339af0"
-    },
-    "834888b6e3db": {
-      "title": "\u00c9irigh (EYE-ree)",
-      "start": "2026-11-03T09:30:00+00:00",
-      "end": "2026-11-03T10:30:00+00:00",
-      "host": "Adam Clarke",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#ff6b6b"
     },
     "104de1d9c865": {
       "title": "\u00c9irigh (EYE-ree)",
@@ -511,15 +497,6 @@
       "image_url": "",
       "source": "radioco",
       "colour": "#339af0"
-    },
-    "ca5decb3ba2b": {
-      "title": "Archive",
-      "start": "2026-11-03T00:00:00+00:00",
-      "end": "2026-11-03T09:30:00+00:00",
-      "host": "",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#ff922b"
     },
     "354f1ed8f5ff": {
       "title": "Archive",
