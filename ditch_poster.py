@@ -711,6 +711,9 @@ def remember_shows(shows: list[Show], state: dict, now: datetime) -> list[Show]:
         if end < now - timedelta(days=1):
             del known[k]  # tidy up old shows
             continue
+        if v.get("title", "").lower() in CFG["ignore"]:
+            del known[k]  # added to IGNORE_SHOWS since it was cached: drop it, don't re-add
+            continue
         if k not in have and end > now:
             shows.append(Show(v["title"], datetime.fromisoformat(v["start"]), end, v.get("host", ""),
                               v.get("image_url", ""), v.get("source", ""), v.get("colour", "")))
