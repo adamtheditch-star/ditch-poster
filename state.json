@@ -1,53 +1,5 @@
 {
   "posted": {
-    "a0c90350dc2a:coming_up:story": {
-      "at": "2026-10-26T08:35:49.606466+00:00",
-      "id": "17954911740277924"
-    },
-    "a0c90350dc2a:live_now:story": {
-      "at": "2026-10-26T09:46:29.101586+00:00",
-      "id": "18394311943161866"
-    },
-    "weekly:20261026:feed": {
-      "at": "2026-10-26T10:01:35.190907+00:00",
-      "id": "18121493866900404"
-    },
-    "weekly:20261026:story": {
-      "at": "2026-10-26T10:01:56.684511+00:00",
-      "id": "18212650030368062"
-    },
-    "mixcloud:theditch-chris-bruce-the-improvement-room-episode-7:story": {
-      "at": "2026-10-26T11:29:24.753214+00:00",
-      "id": "17976139284138760"
-    },
-    "mixcloud:theditch-adam-clarke-c3-a9irigh-19-october-adam-clarke:story": {
-      "at": "2026-10-26T11:36:54.826067+00:00",
-      "id": "18062885477530691"
-    },
-    "mixcloud:theditch-emmet-odonnell-the-weekly-digress-55:story": {
-      "at": "2026-10-26T11:38:44.723771+00:00",
-      "id": "18438736360179522"
-    },
-    "mixcloud:theditch-eamon-sweeney-wimp004-iration-steppas-sound-system:story": {
-      "at": "2026-10-26T11:40:42.641798+00:00",
-      "id": "18100715453437467"
-    },
-    "mixcloud:theditch-bonz-pausa-24th-october-2026:story": {
-      "at": "2026-10-26T11:47:43.625679+00:00",
-      "id": "18098295704222992"
-    },
-    "mixcloud:theditch-adam-clarke-on-the-hop-21st-october-1:story": {
-      "at": "2026-10-26T11:50:21.557753+00:00",
-      "id": "18081483569713671"
-    },
-    "mixcloud:theditch-dj-stayhome-homestay-episode-18-halloween-part-1:story": {
-      "at": "2026-10-26T12:12:17.618637+00:00",
-      "id": "18117127442087799"
-    },
-    "mixcloud:theditch-matt-nida-mostly-listening-27-the-human-league:story": {
-      "at": "2026-10-26T12:19:09.634954+00:00",
-      "id": "18124487135296326"
-    },
     "1592482fd057:coming_up:story": {
       "at": "2026-10-26T19:04:50.176193+00:00",
       "id": "18194776876397677"
@@ -363,6 +315,50 @@
     "8329b5074ad9:live_now:story": {
       "at": "2026-11-07T10:00:39.593307+00:00",
       "id": "18641046235015552"
+    },
+    "104de1d9c865:coming_up:story": {
+      "at": "2026-11-09T09:14:28.634532+00:00",
+      "id": "18051694955630871"
+    },
+    "104de1d9c865:live_now:story": {
+      "at": "2026-11-09T09:34:47.782443+00:00",
+      "id": "17972638503177461"
+    },
+    "0617a16e8f66:coming_up:story": {
+      "at": "2026-11-09T09:37:32.181990+00:00",
+      "id": "17916735255540432"
+    },
+    "weekly:20261109:feed": {
+      "at": "2026-11-09T10:02:41.617772+00:00",
+      "id": "18175910473394122"
+    },
+    "weekly:20261109:story": {
+      "at": "2026-11-09T10:03:02.267186+00:00",
+      "id": "18120864278003660"
+    },
+    "0617a16e8f66:live_now:story": {
+      "at": "2026-11-09T10:35:03.401042+00:00",
+      "id": "18137399308674134"
+    },
+    "5e3f56102639:live_now:story": {
+      "at": "2026-11-09T11:30:35.762243+00:00",
+      "id": "18149071741568371"
+    },
+    "mixcloud:theditch-emmet-odonnell-the-weekly-digress-57:story": {
+      "at": "2026-11-09T13:06:27.232220+00:00",
+      "id": "18110835731192763"
+    },
+    "mixcloud:theditch-matt-nida-mostly-listening-29-how-was-your-90s-week-1:story": {
+      "at": "2026-11-09T13:08:24.332822+00:00",
+      "id": "18146370943593523"
+    },
+    "mixcloud:theditch-dj-stayhome-homestay-episode-20:story": {
+      "at": "2026-11-09T13:11:50.751988+00:00",
+      "id": "17893823232683949"
+    },
+    "mixcloud:theditch-bonz-pausa-6th-november-2026:story": {
+      "at": "2026-11-09T13:18:45.903851+00:00",
+      "id": "17955486981318652"
     }
   },
   "known": {
@@ -581,6 +577,15 @@
       "image_url": "",
       "source": "radioco",
       "colour": "#339af0"
+    },
+    "0617a16e8f66": {
+      "title": "\u00c9irigh (EYE-ree)",
+      "start": "2026-11-09T10:30:00+00:00",
+      "end": "2026-11-09T11:30:00+00:00",
+      "host": "Adam Clarke",
+      "image_url": "",
+      "source": "radioco",
+      "colour": "#ff6b6b"
     }
   }
 }
