@@ -1,13 +1,5 @@
 {
   "posted": {
-    "ae32eb8ba08f:coming_up:story": {
-      "at": "2026-10-31T09:03:20.640743+00:00",
-      "id": "18100770101400059"
-    },
-    "ae32eb8ba08f:live_now:story": {
-      "at": "2026-10-31T10:03:49.491993+00:00",
-      "id": "18104541398563827"
-    },
     "mixcloud:theditch-bonz-pausa-30th-october-2026:story": {
       "at": "2026-11-01T12:32:19.137547+00:00",
       "id": "17921705505452629"
@@ -335,27 +327,17 @@
     "44d140a1dddf:live_now:story": {
       "at": "2026-11-13T14:01:40.900080+00:00",
       "id": "18148985668577119"
+    },
+    "5a8b2f79b0ac:coming_up:story": {
+      "at": "2026-11-14T09:05:23.345502+00:00",
+      "id": "18004944329796262"
+    },
+    "5a8b2f79b0ac:live_now:story": {
+      "at": "2026-11-14T10:00:45.382276+00:00",
+      "id": "17943509919380399"
     }
   },
   "known": {
-    "e24bb1388f62": {
-      "title": "Pausa",
-      "start": "2026-11-13T09:30:00+00:00",
-      "end": "2026-11-13T10:30:00+00:00",
-      "host": "bonz",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#22b8cf"
-    },
-    "acb0964a3f83": {
-      "title": "HomeStay",
-      "start": "2026-11-13T11:00:00+00:00",
-      "end": "2026-11-13T12:08:00+00:00",
-      "host": "DJ Stayhome",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#cc5de8"
-    },
     "5a8b2f79b0ac": {
       "title": "The Ditch Omnibus",
       "start": "2026-11-14T10:00:00+00:00",
@@ -422,7 +404,7 @@
     "41f6745577e1": {
       "title": "Mostly Listening",
       "start": "2026-11-18T20:00:00+00:00",
-      "end": "2026-11-18T21:00:00+00:00",
+      "end": "2026-11-18T21:09:00+00:00",
       "host": "Matt Nida",
       "image_url": "",
       "source": "radioco",
@@ -431,7 +413,7 @@
     "3303201fab1e": {
       "title": "Mostly Listening",
       "start": "2026-11-19T11:00:00+00:00",
-      "end": "2026-11-19T12:00:00+00:00",
+      "end": "2026-11-19T12:09:00+00:00",
       "host": "Matt Nida",
       "image_url": "",
       "source": "radioco",
