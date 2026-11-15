@@ -1,29 +1,5 @@
 {
   "posted": {
-    "mixcloud:theditch-bonz-pausa-30th-october-2026:story": {
-      "at": "2026-11-01T12:32:19.137547+00:00",
-      "id": "17921705505452629"
-    },
-    "mixcloud:theditch-adam-clarke-c3-a9irigh-26th-october:story": {
-      "at": "2026-11-01T12:34:08.493380+00:00",
-      "id": "18113608370271975"
-    },
-    "mixcloud:theditch-emmet-odonnell-the-weekly-digress-56:story": {
-      "at": "2026-11-01T12:35:55.763298+00:00",
-      "id": "18129783622868932"
-    },
-    "mixcloud:theditch-dj-stayhome-homestay-episode-19:story": {
-      "at": "2026-11-01T12:37:50.387568+00:00",
-      "id": "18117958415080288"
-    },
-    "mixcloud:theditch-matt-nida-mostly-listening-28-horror:story": {
-      "at": "2026-11-01T12:44:35.697455+00:00",
-      "id": "18502534534103887"
-    },
-    "mixcloud:theditch-chris-bruce-the-improvement-room-episode-8:story": {
-      "at": "2026-11-01T12:46:19.390068+00:00",
-      "id": "18107778803341280"
-    },
     "626a57b22c87:coming_up:story": {
       "at": "2026-11-02T08:34:13.060972+00:00",
       "id": "17980412219922050"
@@ -335,18 +311,29 @@
     "5a8b2f79b0ac:live_now:story": {
       "at": "2026-11-14T10:00:45.382276+00:00",
       "id": "17943509919380399"
+    },
+    "mixcloud:theditch-dj-stayhome-homestay-episode-21:story": {
+      "at": "2026-11-15T17:00:13.616647+00:00",
+      "id": "18084199394364531"
+    },
+    "mixcloud:theditch-emmet-odonnell-the-weekly-digress-58:story": {
+      "at": "2026-11-15T17:02:05.522150+00:00",
+      "id": "18135606694741712"
+    },
+    "mixcloud:theditch-adam-clarke-c3-a9irigh-9th-november:story": {
+      "at": "2026-11-15T17:08:49.215936+00:00",
+      "id": "18118253324329345"
+    },
+    "mixcloud:theditch-chris-bruce-the-improvement-room-episode-9:story": {
+      "at": "2026-11-15T17:10:29.766841+00:00",
+      "id": "18148123738604231"
+    },
+    "mixcloud:theditch-bonz-pausa-13th-november-2026:story": {
+      "at": "2026-11-15T17:12:17.037333+00:00",
+      "id": "18125991823932935"
     }
   },
   "known": {
-    "5a8b2f79b0ac": {
-      "title": "The Ditch Omnibus",
-      "start": "2026-11-14T10:00:00+00:00",
-      "end": "2026-11-14T16:50:00+00:00",
-      "host": "",
-      "image_url": "",
-      "source": "radioco",
-      "colour": "#339af0"
-    },
     "a3d691805845": {
       "title": "\u00c9irigh (EYE-ree)",
       "start": "2026-11-16T09:30:00+00:00",
