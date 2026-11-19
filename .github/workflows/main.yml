@@ -25,7 +25,16 @@ jobs:
           cache: pip
 
       - name: Install ffmpeg and the mono font the pattern cards use
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+        # Never fatal, and never slow: without ffmpeg the Stories are stills, and without
+        # the font the cards fall back to Poppins. A flaky Ubuntu mirror once held this
+        # step for 27 minutes and stopped the posting, which is a far worse outcome.
+        timeout-minutes: 4
+        continue-on-error: true
+        run: |
+          APT="-qq -o Acquire::Retries=2 -o Acquire::http::Timeout=15"
+          sudo apt-get update $APT || true
+          sudo apt-get install -y $APT ffmpeg fonts-dejavu-core \
+            || echo "apt unavailable; carrying on without it"
 
       - run: pip install -r requirements.txt
 
