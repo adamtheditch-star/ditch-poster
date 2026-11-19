@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Pattern cards: the show details set over a background built from the wordmark.
 
-The backgrounds are the five that were signed off. Their recipes are written out in full
+The backgrounds are the ones that were signed off. Their recipes are written out in full
 below — ground, inks, and the exact size, skew and position of every render of the logo —
 rather than being regenerated from a random seed, so they cannot drift if Python's random
 number generator ever changes.
@@ -46,15 +46,6 @@ SPECS = {
         "ground": "#122610", "inks": ['#8A753D', '#4F7121', '#DD257D'],
         "layers": [
             dict(across=True, w=1785, h=674, skew=0.13621, x=-337, y=-31),
-        ]},
-    "dark07": {
-        "ground": "#1E0E08", "inks": ['#158AA7', '#2E6265', '#A27206'],
-        "layers": [
-            dict(across=True, w=2984, h=1303, skew=0.0, x=-412, y=-341),
-            dict(across=False, w=680, h=3710, skew=0.0, x=242, y=-166),
-            dict(across=False, w=1201, h=4091, skew=0.0, x=85, y=-501),
-            dict(across=False, w=1243, h=3142, skew=0.0, x=-394, y=-177),
-            dict(across=False, w=1337, h=2651, skew=0.0, x=208, y=-293),
         ]},
     "dark16": {
         "ground": "#0F410C", "inks": ['#5F3229'],
