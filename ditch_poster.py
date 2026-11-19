@@ -323,6 +323,14 @@ def render_card(show: Show, kind: str, fmt: str, transparent: bool = False) -> P
 
     The show's Radio.co colour fills the background; the black wavy stamp sits on top
     and holds the wordmark, badge, show title, host and time in white."""
+    # The approved pattern backgrounds. Stories only — the feed card keeps the stamp.
+    if env_bool("PATTERN_CARDS", True) and fmt != "feed" and not transparent:
+        try:
+            import ditch_pattern
+            return ditch_pattern.card(show, kind)
+        except Exception as e:  # a broken card must never stop a post
+            log(f"pattern card failed, falling back to the stamp card ({e})")
+
     W, H = (1080, 1350) if fmt == "feed" else (1080, 1920)
     colour = hex_rgb(show.colour or CFG["accent"])
     ink = text_on(colour)
