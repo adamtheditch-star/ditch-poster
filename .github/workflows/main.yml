@@ -36,6 +36,17 @@ jobs:
           sudo apt-get install -y $APT ffmpeg fonts-dejavu-core \
             || echo "apt unavailable; carrying on without it"
 
+      - name: Fetch Roboto Mono, which the cards are set in
+        # Never fatal: without it ditch_pattern falls back to DejaVu and then Poppins, so
+        # a bad day at Google's font repo costs the look of a card, never the post.
+        timeout-minutes: 2
+        continue-on-error: true
+        run: |
+          mkdir -p assets
+          curl -fsS --max-time 60 -o assets/RobotoMono.ttf \
+            "https://raw.githubusercontent.com/google/fonts/main/ofl/robotomono/RobotoMono%5Bwght%5D.ttf" \
+            || echo "could not fetch Roboto Mono; the cards will fall back"
+
       - run: pip install -r requirements.txt
 
       - name: Watch the schedule and post
