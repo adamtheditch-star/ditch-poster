@@ -25,8 +25,8 @@ W, H = 1080, 1920
 # name; the foot holds the reply bar and the viewer list. Keep the type out of both.
 SAFE_TOP, SAFE_BOTTOM, SAFE_X = 250, 310, 72
 
-# Monospace, with fallbacks. The runner installs fonts-dejavu-core; the others are there
-# in case this is ever run somewhere else.
+# Roboto Mono is what the cards are set in. The workflow fetches it into assets/; these
+# are the stand-ins for a machine that hasn't got it.
 MONO_PATHS = [
     "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf",
     "/usr/share/fonts/truetype/liberation/LiberationMono-Bold.ttf",
@@ -64,11 +64,17 @@ SPECS = {
 
 
 def mono(size: int):
-    for p in MONO_PATHS:
+    roboto = dp.find_asset("RobotoMono.ttf")
+    for path in ([str(roboto)] if roboto.exists() else []) + MONO_PATHS:
         try:
-            return ImageFont.truetype(p, size)
+            f = ImageFont.truetype(path, size)
         except OSError:
             continue
+        try:
+            f.set_variation_by_name("Bold")   # Roboto Mono ships as one variable file
+        except (OSError, ValueError, AttributeError):
+            pass                              # a static font is already the weight we want
+        return f
     return dp.font(size)          # last resort: the Poppins the stamp cards use
 
 
