@@ -21,6 +21,10 @@ from ditch_poster import CFG, Show, hex_rgb, asset
 
 W, H = 1080, 1920
 
+# Instagram's Story furniture. The top band holds the progress bar, avatar and account
+# name; the foot holds the reply bar and the viewer list. Keep the type out of both.
+SAFE_TOP, SAFE_BOTTOM, SAFE_X = 250, 310, 72
+
 # Monospace, with fallbacks. The runner installs fonts-dejavu-core; the others are there
 # in case this is ever run somewhere else.
 MONO_PATHS = [
@@ -128,13 +132,21 @@ def card(show: Show, kind: str) -> "dp.Path":
     bh = wm.height + 32 + sum(int(sz * 1.3) for _, sz in rows)
     bw = int(max([wm.width] + [d.textlength(t, font=mono(sz)) for t, sz in rows if t]))
 
+    # Instagram draws its own furniture over a Story: the avatar, account name and
+    # progress bar across the top, the reply bar and viewer list across the foot. Nothing
+    # we lay out may stray into those bands or it gets covered up.
+    top, bot = SAFE_TOP, H - SAFE_BOTTOM - bh
+    if bot < top:                      # an unusually tall block: centre it and take the hit
+        top = bot = max(0, (H - bh) // 2)
+
     # Where the block goes is judged on two things: how busy the area is, and how far its
     # tone sits from the type's. A flat mid-tone panel is calm and still swallows black.
     grey = img.convert("L").resize((W // 8, H // 8), Image.BILINEAR)
     best = None
-    for cx in (0.07, 0.33):
+    for cx in (SAFE_X, int(W * 0.33)):
         for k in range(10):
-            tx, ty = int(W * cx), int((H - bh) * (0.08 + k * 0.082))
+            tx = max(SAFE_X, min(cx, W - SAFE_X - bw))
+            ty = int(top + (bot - top) * k / 9)
             px = list(grey.crop((tx // 8, ty // 8, min(W, tx + bw) // 8,
                                  min(H, ty + bh) // 8)).getdata())
             mean = sum(px) / len(px)
