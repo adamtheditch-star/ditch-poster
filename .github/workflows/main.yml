@@ -70,8 +70,21 @@ jobs:
         run: |
           git config user.name "ditch-poster"
           git config user.email "ditch-poster@users.noreply.github.com"
-          for f in state.json state.dry.json; do [ -f "$f" ] && git add -f "$f"; done
-          git diff --cached --quiet && exit 0
-          git commit -m "update post history [skip ci]"
-          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          # Keep this run's copies aside, then rebuild the commit on top of whatever main
+          # looks like now. A plain rebase conflicts when two runs overlap and the loser's
+          # receipts are dropped, which is how a show gets posted twice.
+          mkdir -p /tmp/mystate
+          for f in state.json state.dry.json; do [ -f "$f" ] && cp "$f" /tmp/mystate/; done
+          ls /tmp/mystate/*.json >/dev/null 2>&1 || exit 0
+          for i in 1 2 3 4 5; do
+            git fetch -q origin main
+            git checkout -q -f -B post-history origin/main
+            python3 .github/merge_state.py /tmp/mystate
+            for f in state.json state.dry.json; do [ -f "$f" ] && git add -f "$f"; done
+            git diff --cached --quiet && exit 0
+            git commit -q -m "update post history [skip ci]"
+            git push -q origin post-history:main && exit 0
+            echo "push raced with another run, retrying"
+            sleep $((i * 4))
+          done
           exit 1
