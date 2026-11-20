@@ -87,6 +87,12 @@ CFG = {
         "CAPTION_LIVE_NOW",
         "LIVE NOW on Ditch Channel: {show}{host_line}\n\nTune in at ditch.channel {hashtags}",
     ),
+    "caption_replay": env(
+        "CAPTION_REPLAY",
+        "Replay at {time} on Ditch Channel: {show}{host_line}\\n\\nMissed it first time? "
+        "Listen at ditch.channel {hashtags}",
+    ),
+    "replay_within_hours": int(env("REPLAY_WITHIN_HOURS", "48")),
     "hashtags": env("HASHTAGS", "#ditchchannel #radio"),
     "accent": env("ACCENT_COLOUR", "#FCC419"),
     "bg": env("BACKGROUND_COLOUR", "#0B0B0B"),
@@ -143,6 +149,7 @@ class Show:
     image_url: str = ""
     source: str = ""
     colour: str = ""
+    first_aired: datetime | None = None   # set when this slot repeats an earlier airing
 
     @property
     def key(self) -> str:
@@ -378,7 +385,7 @@ def render_card(show: Show, kind: str, fmt: str, transparent: bool = False) -> P
         y += side + 40
 
     # badge, in the show's colour
-    badge = "LIVE NOW" if kind == "live_now" else "COMING UP"
+    badge = {"live_now": "LIVE NOW", "replay": "REPLAY"}.get(kind, "COMING UP")
     bf = font(40 if fmt == "feed" else 44)
     pad = 58 if kind == "live_now" else 28
     bh = int(bf.size * 1.75)
@@ -499,7 +506,8 @@ def video_from_overlay(overlay: Path) -> Path | None:
 
 def caption(show: Show, kind: str) -> str:
     local = show.start.astimezone(CFG["tz"])
-    tmpl = CFG["caption_live_now"] if kind == "live_now" else CFG["caption_coming_up"]
+    tmpl = {"live_now": CFG["caption_live_now"],
+            "replay": CFG["caption_replay"]}.get(kind, CFG["caption_coming_up"])
     return tmpl.replace("\\n", "\n").format(
         show=show.title,
         host=show.host,
@@ -728,6 +736,28 @@ def remember_shows(shows: list[Show], state: dict, now: datetime) -> list[Show]:
     return sorted(shows, key=lambda s: s.start)
 
 
+def earlier_airing(show: Show, state: dict, now: datetime) -> datetime | None:
+    """When this same show last went out, if it was recent enough to call this a replay.
+
+    Radio.co gives a repeat its own slot under the same title, so a title we have already
+    seen air within REPLAY_WITHIN_HOURS is a repeat of it. The window is what keeps a
+    weekly show from being announced as a replay of itself seven days ago.
+    """
+    window = timedelta(hours=CFG["replay_within_hours"])
+    best = None
+    for v in state.get("known", {}).values():
+        if v.get("title") != show.title:
+            continue
+        start = datetime.fromisoformat(v["start"])
+        if not (show.start - window <= start < show.start):
+            continue
+        if datetime.fromisoformat(v["end"]) > now:
+            continue                   # still on air, so there is nothing to replay yet
+        if best is None or start > best:
+            best = start               # the most recent earlier airing
+    return best
+
+
 def run(dry: bool, now: datetime | None = None, shows: list[Show] | None = None,
         status: dict | None = None) -> None:
     if dry and now is None:
@@ -745,7 +775,8 @@ def run(dry: bool, now: datetime | None = None, shows: list[Show] | None = None,
     on_now = None
     for s in shows:
         if s.start - lead <= now < s.start:
-            announce(s, "coming_up", state, dry)
+            s.first_aired = earlier_airing(s, state, now)
+            announce(s, "replay" if s.first_aired else "coming_up", state, dry)
         if s.start <= now < min(s.start + grace, s.end):
             announce(s, "live_now", state, dry)
         if s.start <= now < s.end:
