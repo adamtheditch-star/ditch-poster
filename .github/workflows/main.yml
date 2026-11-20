@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "0 * * * *"   # GitHub often runs this only every few hours, so each run watches
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Check the token and render the cards without posting anything"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -74,7 +79,15 @@ jobs:
           LISTEN_BACK_VIDEO: ${{ vars.LISTEN_BACK_VIDEO }}
           MAX_LISTEN_BACK_PER_RUN: ${{ vars.MAX_LISTEN_BACK_PER_RUN }}
           POLL_MINUTES: ${{ vars.POLL_MINUTES || '5' }}
-        run: python ditch_poster.py --watch ${{ vars.WATCH_MINUTES || '330' }}
+        run: |
+          # A dry run proves the Instagram token still works and the cards still render,
+          # without waiting for a show to be due. Otherwise a dead token is only discovered
+          # by a Story that never appeared.
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            python ditch_poster.py --dry-run
+          else
+            python ditch_poster.py --watch ${{ vars.WATCH_MINUTES || '330' }}
+          fi
 
       - name: Remember what was posted
         if: always()
