@@ -109,6 +109,12 @@ def pick(show: Show) -> str:
     local = show.start.astimezone(CFG["tz"])
     names = sorted(SPECS)
     seed = sum(ord(ch) for ch in show.title.lower()) + local.timetuple().tm_yday
+    if show.first_aired:
+        # a replay never wears the background the airing it repeats wore
+        was = sum(ord(ch) for ch in show.title.lower()) + \
+            show.first_aired.astimezone(CFG["tz"]).timetuple().tm_yday
+        if seed % len(names) == was % len(names):
+            seed += 1
     return names[seed % len(names)]
 
 
@@ -122,7 +128,8 @@ def card(show: Show, kind: str) -> "dp.Path":
     while ts > 40 and d.textlength(title, font=mono(ts)) > W * 0.56:
         ts -= 2
 
-    rows = [("COMING UP" if kind == "coming_up" else "LIVE NOW", 44), (title, ts)]
+    head = {"live_now": "LIVE NOW", "replay": "REPLAY"}.get(kind, "COMING UP")
+    rows = [(head, 44), (title, ts)]
     if show.host:
         rows.append(("WITH " + show.host.upper(), 44))
     rows.append(("", 28))
@@ -130,6 +137,9 @@ def card(show: Show, kind: str) -> "dp.Path":
         rows.append((("ON AIR NOW" if show.source == "live" else f"ON AIR UNTIL {e:%H.%M}"), 44))
     else:
         rows += [(f"{s:%a %-d %b}".upper(), 44), (f"{s:%H.%M}-{e:%H.%M}", 44)]
+    if kind == "replay" and show.first_aired:
+        first = show.first_aired.astimezone(CFG["tz"])
+        rows += [("", 28), (f"FIRST AIRED {first:%a %H.%M}".upper(), 44)]
     rows += [("", 28), ("LINK IN BIO:", 44), ("DITCH.CHANNEL", 44)]
 
     wm = asset("wordmark.png")
